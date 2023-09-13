@@ -1,21 +1,36 @@
 package com.dam.server.dto;
 
+import com.dam.server.enums.Role;
+import com.dam.server.models.User;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Size;
 
 @AllArgsConstructor
-@NoArgsConstructor
+@Builder
 @Data
 public class UserDTO {
-
-    @Size(min=3, max=20, message="Username must be between 3 and 20 characters!")
+    private Long id;
     private String username;
-
-    @Size(min=8, message="Password must be at least 8 characters!")
     private String password;
+    private String email;
 
-    private String repeatPassword;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public static UserDTO fromEntity(User user){
+        return UserDTO
+                .builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .build();
+    }
 }
