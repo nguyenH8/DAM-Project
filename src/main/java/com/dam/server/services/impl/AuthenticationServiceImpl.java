@@ -3,7 +3,7 @@ package com.dam.server.services.impl;
 import com.dam.server.models.AuthenticationRequest;
 import com.dam.server.models.AuthenticationResponse;
 import com.dam.server.models.RegisterRequest;
-import com.dam.server.models.User;
+import com.dam.server.entities.User;
 import com.dam.server.repositories.UserRepository;
 import com.dam.server.services.iServices.IAuthenticationService;
 import lombok.AllArgsConstructor;
@@ -83,6 +83,14 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 
     @Override
     public ResponseEntity<?> changePassword(String username, String newPassword) {
-        return null;
+        final Optional<User> user = userRepository.findByUsername(username);
+
+        if (user.isPresent()){
+            final User oldUser = user.get();
+            oldUser.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(oldUser);
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.badRequest().body("Can not find any user have username match with yours");
     }
 }

@@ -1,8 +1,8 @@
 package com.dam.server.services.impl;
 
-import com.dam.server.models.User;
+import com.dam.server.entities.User;
 import com.dam.server.repositories.UserRepository;
-import com.dam.server.services.iServices.UserService;
+import com.dam.server.services.iServices.IAdminUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class UserServiceImpl implements UserService {
+public class AdminUserServiceImpl implements IAdminUserService {
 
     @Autowired
     private final UserRepository userRepository;
@@ -24,7 +24,6 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("User cannot be null");
         }
 
-
         if(userRepository.existsByUsername(user.getUsername())){
             throw new IllegalArgumentException("A user with the same username already exists");
         }
@@ -33,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(Long id) {
+    public User getUserById(Long id) {
         if(id == null){
             throw new IllegalArgumentException("ID cannot be null");
         }

@@ -1,5 +1,6 @@
-package com.dam.server.models;
+package com.dam.server.entities;
 
+import com.dam.server.entities.Asset;
 import com.dam.server.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Data
 @Builder
@@ -27,8 +29,8 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String email;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Asset[] assets;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Asset> assets;
 
     @Enumerated(EnumType.STRING)
     private Role role;

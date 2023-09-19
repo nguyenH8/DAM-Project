@@ -1,15 +1,12 @@
 package com.dam.server.dto;
 
 import com.dam.server.enums.Role;
-import com.dam.server.models.User;
+import com.dam.server.entities.User;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @Builder

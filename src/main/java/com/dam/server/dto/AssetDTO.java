@@ -10,8 +10,9 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 public class AssetDTO {
+    private String assetId;
     private String assetName;
-    private String assetSize;
+    private Long assetSize;
     private Date uploadedDate;
     private Date updatedDate;
     private Date downloadedDate;

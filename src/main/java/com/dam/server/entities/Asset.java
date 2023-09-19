@@ -1,4 +1,4 @@
-package com.dam.server.models;
+package com.dam.server.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,13 +18,18 @@ import java.util.UUID;
 public class Asset {
 
     @Id
+    @Builder.Default
+    @Column(name="id")
     private String id = UUID.randomUUID().toString();
 
     @Column(name="asset_name")
     private String assetName;
 
     @Column(name="asset_size")
-    private Integer assetSize;
+    private Long assetSize;
+
+    @Column(name="asset_type")
+    private String assetType;
 
     @Column(name="uploaded_date")
     private Date uploadedDate;
